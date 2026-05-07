@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Filipa Martins</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --blue:#0000FF;
+  --cream:#F0EEE9;
+  --black:#000;
+  --white:#fff;
+  --tp:rgba(0,0,0,0.85);
+  --ts:rgba(0,0,0,0.45);
+  --tt:rgba(0,0,0,0.22);
+  --ob-p:rgba(255,255,255,0.9);
+  --ob-s:rgba(255,255,255,0.45);
+  --border:rgba(0,0,0,0.09);
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--white);color:var(--tp);max-width:680px;margin:0 auto;overflow-x:hidden;}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding:32px 28px 48px;background:var(--cream);border-bottom:2px solid var(--black);}
+.hero-top{display:flex;justify-content:space-between;}
+.badge{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--white);background:var(--black);padding:5px 10px;}
+.year{font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:3px;color:var(--tt);}
+.hero-name{font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(40px,10vw,64px);line-height:0.92;letter-spacing:-2px;color:var(--black);margin-top:48px;}
+.hero-name span{display:block;color:var(--black);}
+.hero-rule{border:none;border-top:2px solid var(--black);margin:22px 0;}
+.hero-title{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:24px;}
+.hero-quote{font-family:'Inter',sans-serif;font-size:14px;font-weight:500;font-style:normal;line-height:1.85;color:var(--tp);border-left:2px solid var(--blue);padding-left:16px;margin-bottom:36px;max-width:460px;}
+.hero-quote strong{font-weight:500;font-style:normal;color:var(--tp);}
+.hero-contacts{display:flex;flex-direction:column;gap:8px;}
+.hero-contact{font-family:'Inter',sans-serif;font-size:12px;font-weight:300;color:var(--ts);text-decoration:none;letter-spacing:0.3px;transition:color 0.15s;}
+.hero-contact:hover{color:var(--blue);}
+
+/* NAV */
+.nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:2px solid var(--black);display:flex;overflow-x:auto;scrollbar-width:none;}
+.nav::-webkit-scrollbar{display:none;}
+.nav-btn{flex-shrink:0;padding:14px 20px;font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--tt);background:none;border:none;cursor:pointer;border-right:1px solid var(--border);transition:all 0.15s;white-space:nowrap;}
+.nav-btn:last-child{border-right:none;}
+.nav-btn.active{color:var(--white);background:var(--black);}
+
+/* SECTIONS */
+.section{display:none;background:var(--white);}
+.section.active{display:block;}
+.section.active>*{animation:fadeUp 0.3s ease both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+/* SHARED SECTION HERO */
+.sec-hero{background:var(--black);padding:36px 28px;border-bottom:2px solid var(--black);}
+.sec-hero-title{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:900;letter-spacing:-0.5px;line-height:1.1;color:var(--ob-p);margin-bottom:8px;}
+.sec-hero-sub{font-family:'Inter',sans-serif;font-size:12px;font-weight:300;color:var(--ob-s);line-height:1.7;}
+
+/* STORY */
+.chapter{padding:48px 28px 0;border-bottom:1px solid var(--border);background:var(--white);position:relative;}
+.chapter:nth-child(even){background:var(--cream);}
+.chapter .ch-p:last-child{padding-bottom:48px;}
+.ch-ghost{position:absolute;top:16px;right:20px;font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(80px,22vw,140px);color:rgba(0,0,255,0.06);line-height:1;pointer-events:none;user-select:none;letter-spacing:-4px;z-index:0;}
+.ch-label{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--tt);margin-bottom:10px;position:relative;z-index:1;}
+.ch-title{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:900;letter-spacing:-0.5px;line-height:1.1;color:var(--tp);margin-bottom:20px;position:relative;z-index:1;}
+.ch-title em{color:var(--blue);font-style:normal;}
+.ch-p{font-family:'Inter',sans-serif;font-size:14px;font-weight:300;line-height:1.9;color:var(--ts);margin-bottom:14px;position:relative;z-index:1;}
+.ch-p strong{font-weight:500;color:var(--tp);}
+.ch-invert{background:var(--black);padding:20px 28px;margin-top:24px;width:100%;position:relative;z-index:1;}
+.ch-invert p{font-family:'Montserrat',sans-serif;font-weight:700;font-size:15px;color:var(--ob-p);line-height:1.4;letter-spacing:-0.2px;}
+
+/* ENDING */
+.ending{background:var(--black);padding:52px 28px;}
+.ending-big{font-family:'Montserrat',sans-serif;font-weight:900;font-size:22px;color:var(--ob-p);line-height:1.3;letter-spacing:-0.5px;margin-bottom:24px;}
+.ending-big em{font-style:italic;}
+.ending-p{font-family:'Inter',sans-serif;font-size:12px;font-weight:300;color:var(--ob-s);line-height:1.7;margin-bottom:28px;}
+.ending-cta{display:inline-block;background:var(--blue);color:var(--white);font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:14px 24px;text-decoration:none;transition:opacity 0.15s;}
+.ending-cta:hover{opacity:0.85;}
+.ending-sub{font-family:'Inter',sans-serif;font-size:11px;font-weight:300;color:var(--ob-s);opacity:0.5;margin-top:14px;line-height:1.6;}
+
+/* PRD LINK */
+.prd-link{display:inline-flex;align-items:center;gap:10px;background:var(--white);border:1px solid var(--black);padding:12px 20px;margin-top:20px;text-decoration:none;transition:all 0.15s;}
+.prd-link:hover{background:var(--black);}
+.prd-link:hover .prd-link-text{color:var(--white);}
+.prd-link:hover .prd-link-arrow{color:var(--white);}
+.prd-link-label{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--blue);margin-bottom:10px;}
+.prd-link-text{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:var(--black);letter-spacing:0.3px;}
+.prd-link-arrow{font-family:'Montserrat',sans-serif;font-size:14px;color:var(--blue);font-weight:700;}
+.prd-wrapper{padding:24px 28px;background:var(--cream);border-bottom:1px solid var(--border);}
+
+/* PROTOTYPE */
+.proto-section{padding:32px 28px;background:var(--white);border-bottom:1px solid var(--border);}
+.proto-label{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:16px;}
+.proto-title{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:900;letter-spacing:-0.5px;line-height:1.1;color:var(--tp);margin-bottom:6px;}
+.proto-sub{font-family:'Inter',sans-serif;font-size:12px;font-weight:300;color:var(--ts);line-height:1.7;margin-bottom:20px;}
+.proto-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+.proto-screen{display:flex;flex-direction:column;gap:6px;}
+.proto-screen img{width:100%;border:1px solid var(--border);display:block;}
+.proto-caption{font-family:'Inter',sans-serif;font-size:10px;font-weight:300;color:var(--ts);line-height:1.4;text-align:center;}
+@media(max-width:480px){.proto-grid{grid-template-columns:repeat(2,1fr);}}
+
+/* ELO STATS */
+.proj-stats{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--border);background:var(--cream);}
+.proj-stat{padding:20px 16px;border-right:1px solid var(--border);}
+.proj-stat:last-child{border-right:none;}
+.proj-stat-num{font-family:'Montserrat',sans-serif;font-weight:900;font-size:26px;color:var(--blue);letter-spacing:-1px;line-height:1;}
+.proj-stat-label{font-family:'Inter',sans-serif;font-size:10px;font-weight:300;color:var(--ts);margin-top:4px;line-height:1.4;}
+
+/* ELO BLOCKS */
+.proj-block{padding:32px 28px;border-bottom:1px solid var(--border);background:var(--white);}
+.proj-block.alt{background:var(--cream);}
+.proj-block:last-child{border-bottom:none;}
+.proj-block-label{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:8px;}
+.proj-block-title{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:900;letter-spacing:-0.5px;line-height:1.1;color:var(--tp);margin-bottom:12px;}
+.proj-p{font-family:'Inter',sans-serif;font-size:14px;font-weight:300;color:var(--ts);line-height:1.9;margin-bottom:10px;}
+.proj-p strong{font-weight:500;color:var(--tp);}
+
+/* PROBLEM CARDS */
+.problem-cards{display:flex;flex-direction:column;margin-top:14px;border:1px solid var(--border);}
+.problem-card{display:flex;gap:16px;padding:18px;border-bottom:1px solid var(--border);background:var(--white);}
+.problem-card:last-child{border-bottom:none;}
+.prob-num{font-family:'Montserrat',sans-serif;font-weight:900;font-size:28px;color:rgba(0,0,255,0.1);flex-shrink:0;width:28px;line-height:1;}
+.prob-title{font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.3px;color:var(--tp);margin-bottom:4px;}
+.prob-text{font-family:'Inter',sans-serif;font-size:12px;font-weight:300;color:var(--ts);line-height:1.65;}
+
+/* QUOTE BLOCKS */
+.quote-block{border-left:2px solid var(--blue);padding:12px 16px;margin:8px 0;}
+.quote-block p{font-family:'Inter',sans-serif;font-size:13px;font-weight:300;font-style:italic;color:var(--ts);line-height:1.65;}
+
+/* NSM */
+.nsm-card{background:var(--black);padding:24px;margin-top:14px;}
+.nsm-metric{font-family:'Montserrat',sans-serif;font-weight:900;font-size:13px;color:var(--ob-p);letter-spacing:0.5px;text-transform:uppercase;margin-bottom:8px;line-height:1.3;}
+.nsm-def{font-family:'Inter',sans-serif;font-size:12px;font-weight:300;color:var(--ob-s);line-height:1.7;margin-bottom:14px;}
+.nsm-why{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;color:var(--ob-s);border-top:1px solid rgba(255,255,255,0.08);padding-top:12px;letter-spacing:0.5px;}
+
+/* HONEST */
+.honest-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin-top:14px;}
+.honest-col{padding:18px;}
+.honest-col.s{background:var(--white);}
+.honest-col.c{background:var(--cream);}
+.honest-col-title{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--tt);margin-bottom:10px;}
+.honest-item{font-family:'Inter',sans-serif;font-size:12px;font-weight:300;color:var(--ts);line-height:1.65;padding:3px 0;display:flex;gap:6px;}
+.s .honest-item::before{content:'✓';color:#22c55e;flex-shrink:0;}
+.c .honest-item::before{content:'→';color:var(--tt);flex-shrink:0;}
+
+/* LEARNING */
+.learning-cards{display:flex;flex-direction:column;border:1px solid var(--border);margin-top:14px;}
+.learning-card{padding:18px;background:var(--white);border-bottom:1px solid var(--border);}
+.learning-card:last-child{border-bottom:none;}
+.lc-title{font-family:'Montserrat',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.3px;color:var(--tp);margin-bottom:5px;}
+.lc-body{font-family:'Inter',sans-serif;font-size:12px;font-weight:300;color:var(--ts);line-height:1.65;}
+
+/* EXPERIENCE */
+.exp-item{border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.15s;background:var(--white);}
+.exp-item:nth-child(even){background:var(--cream);}
+.exp-item:hover{background:rgba(0,0,255,0.02);}
+.exp-summary{display:flex;justify-content:space-between;align-items:flex-start;padding:20px 28px;gap:16px;}
+.exp-left{flex:1;}
+.exp-role{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;color:var(--tp);line-height:1.3;margin-bottom:3px;}
+.exp-co{font-family:'Inter',sans-serif;font-size:11px;font-weight:300;color:var(--blue);margin-bottom:2px;}
+.exp-date{font-family:'Inter',sans-serif;font-size:10px;font-weight:300;color:var(--tt);letter-spacing:0.3px;}
+.exp-toggle{width:22px;height:22px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.15s;margin-top:2px;}
+.exp-item.open .exp-toggle{background:var(--blue);border-color:var(--blue);}
+.exp-toggle svg{width:10px;height:10px;fill:none;stroke:rgba(0,0,0,0.3);stroke-width:1.5;transition:all 0.2s;}
+.exp-item.open .exp-toggle svg{stroke:var(--white);transform:rotate(45deg);}
+.exp-detail{display:none;padding:0 28px 20px;}
+.exp-item.open .exp-detail{display:block;}
+.exp-bullets{list-style:none;}
+.exp-bullets li{font-family:'Inter',sans-serif;font-size:12px;font-weight:300;color:var(--ts);line-height:1.8;padding:3px 0 3px 16px;position:relative;}
+.exp-bullets li::before{content:'';position:absolute;left:0;top:12px;width:6px;height:1px;background:var(--blue);}
+.exp-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;}
+.exp-tag{font-family:'Montserrat',sans-serif;font-size:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 8px;border:1px solid var(--border);color:var(--tt);}
+
+/* EDUCATION */
+.edu-item{padding:28px;border-bottom:1px solid var(--border);background:var(--white);}
+.edu-item:nth-child(even){background:var(--cream);}
+.edu-item:last-child{border-bottom:none;}
+.edu-degree{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;color:var(--tp);margin-bottom:4px;line-height:1.3;}
+.edu-school{font-family:'Inter',sans-serif;font-size:12px;font-weight:300;color:var(--blue);margin-bottom:3px;}
+.edu-date{font-family:'Inter',sans-serif;font-size:10px;font-weight:300;color:var(--tt);margin-bottom:10px;letter-spacing:0.3px;}
+.edu-desc{font-family:'Inter',sans-serif;font-size:12px;font-weight:300;color:var(--ts);line-height:1.7;}
+.cert-section{padding:28px;background:var(--cream);}
+.cert-label{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--tt);margin-bottom:12px;}
+.cert-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);}
+.cert-pill{background:var(--black);color:var(--ob-p);font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:12px 14px;line-height:1.4;}
+
+/* SKILLS */
+.skill-block{padding:0;border-bottom:1px solid var(--border);}
+.skill-block:last-child{border-bottom:none;}
+.skill-block:nth-child(odd){background:var(--cream);}
+.skill-block:nth-child(even){background:var(--white);}
+.skill-block-header{padding:20px 28px 0;}
+.skill-block-label{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:14px;}
+.skill-grid{display:flex;flex-wrap:wrap;gap:8px;padding:0 28px 24px;}
+.skill-item{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:7px 14px;border:1px solid var(--border);color:var(--ts);background:transparent;cursor:default;transition:background 0.15s,color 0.15s,border-color 0.15s;}
+.skill-item:hover{background:var(--blue);color:var(--white);border-color:var(--blue);}
+.lang-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--border);}
+.lang-item{padding:28px 12px;text-align:center;border-right:1px solid var(--border);background:var(--white);}
+.lang-item:last-child{border-right:none;}
+.lang-code{font-family:'Montserrat',sans-serif;font-weight:900;font-size:32px;color:var(--blue);letter-spacing:-1px;line-height:1;}
+.lang-name{font-family:'Inter',sans-serif;font-size:11px;font-weight:500;color:var(--tp);margin-top:6px;}
+.lang-level{font-family:'Inter',sans-serif;font-size:10px;font-weight:300;color:var(--tt);margin-top:3px;}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-top">
+    <div class="badge">Open to work</div>
+    <div class="year">2026</div>
+  </div>
+  <div>
+    <div class="hero-name">Filipa<span>Martins</span></div>
+    <hr class="hero-rule">
+    <div class="hero-title">Product Manager &nbsp;&middot;&nbsp; Production &amp; Creative Leadership</div>
+    <p class="hero-quote">Delivery isn't something I studied. It's something I did - for ten years, under pressure, across industries - from hospitality to film sets. Now I'm just adjusting the vocabulary.</p>
+    <div class="hero-contacts">
+      <a href="mailto:filipa.m.work@gmail.com" class="hero-contact">filipa.m.work@gmail.com</a>
+      <a href="tel:+351914919212" class="hero-contact">+351 914 919 212</a>
+      <a href="https://www.linkedin.com/in/filiparmartins/" target="_blank" class="hero-contact">linkedin.com/in/filiparmartins</a>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav">
+  <button class="nav-btn active" onclick="showTab('story',this)">My Story</button>
+  <button class="nav-btn" onclick="showTab('projects',this)">ELO</button>
+  <button class="nav-btn" onclick="showTab('exp',this)">Experience</button>
+  <button class="nav-btn" onclick="showTab('edu',this)">Education</button>
+  <button class="nav-btn" onclick="showTab('skills',this)">Skills</button>
+</div>
+
+<!-- MY STORY -->
+<div class="section active" id="story">
+
+  <div class="chapter">
+    <div class="ch-ghost">01</div>
+    <div class="ch-label">Chapter 01</div>
+    <div class="ch-title">The suitcase and <em>the one-way ticket.</em></div>
+    <p class="ch-p">I'd spent three years studying Nutrition Science - rigorous, analytical, systems-based thinking. Then life had other plans. I left Portugal in 2011 with 1000 euros and a broken suitcase. People thought I was mad. Maybe I was. But I've always done my best work at the edge of my comfort zone - in new environments, with new people, figuring things out as I go. London wasn't a plan. It was a decision. And it turned out to be the best one I ever made.</p>
+    <div class="ch-invert"><p>I can land somewhere with almost nothing and figure it out.</p></div>
+  </div>
+
+  <div class="chapter">
+    <div class="ch-ghost">02</div>
+    <div class="ch-label">Chapter 02</div>
+    <div class="ch-title">What <em>London</em> taught me</div>
+    <p class="ch-p">Seven years in one of the world's most international cities taught me to read people fast - their context, their needs, their frustrations. I worked in restaurants, hostels, studios. I led teams, managed chaos, and kept things running in environments where no two days were the same. I arrived without fluency and left with full professional English, advanced Spanish, and enough of a dozen other languages to make people feel at home. You learn differently when you have no choice but to.</p>
+    <div class="ch-invert"><p>Every room I walked into was different. I learned to make it work anyway.</p></div>
+  </div>
+
+  <div class="chapter">
+    <div class="ch-ghost">03</div>
+    <div class="ch-label">Chapter 03</div>
+    <div class="ch-title"><em>Learning</em> to see</div>
+    <p class="ch-p">While working sixteen-hour shifts at a hostel, I was also studying photography at the University of the Arts London. It taught me that good work is about decisions - what to include, what to cut, what actually matters to the person on the other side. I've carried that instinct into everything I've done since. And it taught me something about myself too: I don't fold under pressure. I get clearer.</p>
+    <div class="ch-invert"><p>Constraints don't stop good work. They shape it.</p></div>
+  </div>
+
+  <div class="chapter">
+    <div class="ch-ghost">04</div>
+    <div class="ch-label">Chapter 04</div>
+    <div class="ch-title">A decade <em>on set</em></div>
+    <p class="ch-p">Back in Portugal from 2018, I spent a decade making things happen across film, advertising, photography and creative production. BBC documentaries. Fast &amp; Furious 10. Twelve simultaneous brand projects. Hotel to hotel, deadline to deadline. I coordinated teams, managed stakeholders, kept budgets tight and shoots on schedule. I was always the person in the middle - translating between vision and reality, between what people wanted and what was actually possible.</p>
+    <div class="ch-invert"><p>Delivery is a discipline. I've been practising it for ten years.</p></div>
+  </div>
+
+  <div class="chapter">
+    <div class="ch-ghost">05</div>
+    <div class="ch-label">Chapter 05</div>
+    <div class="ch-title">The <em>shift.</em></div>
+    <p class="ch-p">After a decade of parachuting into other people's projects, I started asking different questions. Not just how do we make this work - but why are we making it, and how will we know if it worked? That shift changed everything. I realised I didn't want another project. I wanted a problem worth staying with. A team worth investing in. Work I could watch grow. I completed a Product Management &amp; AI Bootcamp at AllWomen - not to change who I am, but to put a name and a framework on what I've always done.</p>
+    <div class="ch-invert"><p>Done moving on. Ready to build.</p></div>
+  </div>
+
+  <div class="ending">
+    <div class="ending-big">Done moving on. <em>Ready to build.</em></div>
+    <p class="ending-p">Open to Associate PM, Product Owner, Product Manager &amp; Scrum Master roles - Lisbon, hybrid or remote.</p>
+    <a href="mailto:filipa.m.work@gmail.com" class="ending-cta">Get in touch &rarr;</a>
+    <p class="ending-sub">filipa.m.work@gmail.com &nbsp;&middot;&nbsp; +351 914 919 212</p>
+  </div>
+
+</div>
+
+<!-- ELO -->
+<div class="section" id="projects">
+
+  <div class="sec-hero">
+    <div class="sec-hero-title">ELO</div>
+    <p class="sec-hero-sub">Retirement should be a beginning - not an ending. But for millions in Portugal, it becomes the moment the world stops calling. A free, government-backed app connecting adults 65+ with local events, community groups and volunteer opportunities. No ads. No noise. Just connection.</p>
+  </div>
+
+  <div class="proj-block">
+    <div class="proj-block-label">The Problem</div>
+    <div class="proj-block-title">One problem. Three sides.</div>
+    <p class="proj-p"><strong>25% of Portugal is over 65</strong> - projected to reach 34.5% by 2050. 67% report loneliness as a sustained condition. This is not sentiment. It is a public health crisis.</p>
+    <div class="problem-cards">
+      <div class="problem-card"><div class="prob-num">1</div><div><div class="prob-title">Loneliness &amp; isolation</div><div class="prob-text">67% report chronic loneliness. The mortality risk equals smoking 15 cigarettes a day.</div></div></div>
+      <div class="problem-card"><div class="prob-num">2</div><div><div class="prob-title">No tool built for them</div><div class="prob-text">Facebook comes with noise, fake news, and algorithmic chaos. Our research shows users are disengaging.</div></div></div>
+      <div class="problem-card"><div class="prob-num">3</div><div><div class="prob-title">The discovery gap</div><div class="prob-text">69% don't know where to find local activities. The problem is not supply - it is connection.</div></div></div>
+    </div>
+  </div>
+
+  <div class="proj-block alt">
+    <div class="proj-block-label">Primary Research</div>
+    <div class="proj-block-title">We didn't assume. We listened.</div>
+    <p class="proj-p">5 in-depth interviews with adults aged 62-73 and a survey of 23 respondents. All 5 independently described the same gap - without prompting.</p>
+    <div class="quote-block"><p>"The information exists somewhere, I'm sure. But I can't get there on my own."</p></div>
+    <div class="quote-block"><p>"I know there are things happening near me. I just don't know how to find them."</p></div>
+  </div>
+
+  <div class="proj-stats">
+    <div class="proj-stat"><div class="proj-stat-num">23</div><div class="proj-stat-label">Survey respondents</div></div>
+    <div class="proj-stat"><div class="proj-stat-num">5</div><div class="proj-stat-label">In-depth interviews ages 62-73</div></div>
+    <div class="proj-stat"><div class="proj-stat-num">5/5</div><div class="proj-stat-label">Described the same gap independently</div></div>
+  </div>
+
+  <div class="proj-block">
+    <div class="proj-block-label">North Star Metric</div>
+    <div class="proj-block-title">We measure belonging, not presence.</div>
+    <div class="nsm-card">
+      <div class="nsm-metric">Monthly Engaged Community Members</div>
+      <div class="nsm-def">Users who attend &ge;1 event &middot; interact in &ge;1 group &middot; OR exchange &ge;1 message - in a calendar month.</div>
+      <div class="nsm-why">Why not MAU? Because presence is not the same as belonging.</div>
+    </div>
+  </div>
+
+  <div class="prd-wrapper">
+    <div class="prd-link-label">Full documentation</div>
+    <a class="prd-link" href="ELO_PRD.pdf" target="_blank">
+      <div>
+        <div class="prd-link-text">ELO Product Requirements Document</div>
+        <div style="font-family:'Inter',sans-serif;font-size:11px;font-weight:300;color:var(--ts);margin-top:3px;">Personas · MoSCoW prioritisation · User stories · Risk register · v1.0 · May 2026</div>
+      </div>
+      <div class="prd-link-arrow">&rarr;</div>
+    </a>
+  </div>
+
+  <div class="proto-section">
+    <div class="proto-label">Prototype</div>
+    <div class="proto-title">14 screens. Built for real people.</div>
+    <p class="proto-sub">Key screens from the Phase 1 MVP prototype - designed around the principle that value comes before friction.</p>
+    <div class="proto-grid">
+      <div class="proto-screen">
+        <img src="Elo_1.png" alt="ELO onboarding screen">
+        <div class="proto-caption">Onboarding - browse before login</div>
+      </div>
+      <div class="proto-screen">
+        <img src="Elo_2.png" alt="ELO text size selector">
+        <div class="proto-caption">Text size - second screen, before anything else</div>
+      </div>
+      <div class="proto-screen">
+        <img src="Elo_3.png" alt="ELO event feed">
+        <div class="proto-caption">Event feed - local, calm, no noise</div>
+      </div>
+      <div class="proto-screen">
+        <img src="Elo_4.png" alt="ELO user profile">
+        <div class="proto-caption">Profile - Maria's journey from attender to organiser</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="proj-block alt">
+    <div class="proj-block-label">Honest Assessment</div>
+    <div class="proj-block-title">What works. What doesn't. Yet.</div>
+    <div class="honest-grid">
+      <div class="honest-col s">
+        <div class="honest-col-title">Strengths</div>
+        <div class="honest-item">Open by default - browse without login</div>
+        <div class="honest-item">Government trust as a feature</div>
+        <div class="honest-item">No ads, no noise, no opinions</div>
+        <div class="honest-item">Designed for this audience from scratch</div>
+        <div class="honest-item">Free. Forever.</div>
+      </div>
+      <div class="honest-col c">
+        <div class="honest-col-title">Challenges</div>
+        <div class="honest-item">Cold start - content before community</div>
+        <div class="honest-item">Gov funding is a goal, not confirmed</div>
+        <div class="honest-item">Behaviour change is slow</div>
+        <div class="honest-item">Small research sample - directional only</div>
+        <div class="honest-item">Digital literacy range is wide</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="proj-block">
+    <div class="proj-block-label">Reflections</div>
+    <div class="proj-block-title">What I learned.</div>
+    <div class="learning-cards">
+      <div class="learning-card"><div class="lc-title">The metric is the product philosophy</div><div class="lc-body">Choosing Monthly Engaged Community Members over MAU changed everything. What you measure shapes what you build.</div></div>
+      <div class="learning-card"><div class="lc-title">Honest assessment is a PM skill</div><div class="lc-body">The hardest slide to write was the limitations. It's also the one I'm most proud of. Good PMs know what they don't know.</div></div>
+      <div class="learning-card"><div class="lc-title">I understand users because I've been one</div><div class="lc-body">My mother is 65+. I've watched her navigate products not built for her. That's not empathy as a soft skill - that's product insight as lived experience.</div></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- EXPERIENCE -->
+<div class="section" id="exp">
+
+  <div class="sec-hero">
+    <div class="sec-hero-title">Experience</div>
+    <p class="sec-hero-sub">A decade of shipping things that work - across hospitality, film, photography, advertising and product.</p>
+  </div>
+
+  <!-- CV: Jan 2023 – Present (updated from Jun 2018) -->
+  <div class="exp-item" onclick="toggleExp(this)">
+    <div class="exp-summary"><div class="exp-left"><div class="exp-role">Creative Producer &middot; Production Manager</div><div class="exp-co">Freelance &middot; Lisbon</div><div class="exp-date">Jan 2023 – Present</div></div><div class="exp-toggle"><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12"/></svg></div></div>
+    <div class="exp-detail"><ul class="exp-bullets">
+      <li>Managed the full lifecycle of digital content projects for up to 12 clients annually, delivering on time and within budget across projects ranging from €5k to €50k</li>
+      <li>Converted client briefs into actionable production plans, aligning creatives and technical teams around clear deliverables and guaranteeing seamless cross-functional execution</li>
+      <li>Consistently delivered high-quality outcomes under constrained budgets and lean crew conditions, demonstrating resourcefulness and operational efficiency across diverse production contexts</li>
+    </ul></div>
+  </div>
+
+  <!-- CV: Nov 2023 – Dec 2024, now with metrics -->
+  <div class="exp-item" onclick="toggleExp(this)">
+    <div class="exp-summary"><div class="exp-left"><div class="exp-role">Creative Production Manager</div><div class="exp-co">99ads &middot; Lisbon</div><div class="exp-date">Nov 2023 – Dec 2024</div></div><div class="exp-toggle"><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12"/></svg></div></div>
+    <div class="exp-detail"><ul class="exp-bullets">
+      <li>Managed up to 12 concurrent brand projects, maintaining a 100% on-time delivery rate across all engagements under aggressive deadlines</li>
+      <li>Implemented Agile Scrum/Kanban methodologies, cutting delivery cycles from 15 to 7 days and reducing production errors by ~30% through redesigned internal workflows</li>
+      <li>Bridged designers, copywriters, video producers and clients - converting briefs into clear deliverables and managing structured feedback loops that minimised revision rounds</li>
+    </ul></div>
+  </div>
+
+  <!-- CV: Jun 2018 – Nov 2023, now with full brand/project list -->
+  <div class="exp-item" onclick="toggleExp(this)">
+    <div class="exp-summary"><div class="exp-left"><div class="exp-role">Production Assistant &middot; Advertising, Film &amp; TV</div><div class="exp-co">Freelance &middot; Lisbon</div><div class="exp-date">Jun 2018 – Nov 2023</div></div><div class="exp-toggle"><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12"/></svg></div></div>
+    <div class="exp-detail"><ul class="exp-bullets">
+      <li>Supported high-budget film, TV, advertising and photography productions including multimillion-dollar international sets with crews of 50+, ensuring seamless on-set coordination across departments, schedules and logistics</li>
+      <li>Anticipated and resolved on-set issues before escalation, maintaining production momentum on major projects including BBC's Walking with Dinosaurs, Vampire Academy and Fast &amp; Furious 10 (est. $340M production budget)</li>
+      <li>Brands: Heineken, Peugeot, VW, C&amp;A, Lidl, Vogue, Harpers Bazaar, Numero Tokyo, Peek &amp; Cloppenburg and others</li>
+    </ul></div>
+  </div>
+
+  <!-- CV: Jan 2014 – Present -->
+  <div class="exp-item" onclick="toggleExp(this)">
+    <div class="exp-summary"><div class="exp-left"><div class="exp-role">Photographer &middot; Content Creator &middot; Location Scout</div><div class="exp-co">Freelance &middot; London &amp; Lisbon</div><div class="exp-date">Jan 2014 – Present</div></div><div class="exp-toggle"><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12"/></svg></div></div>
+    <div class="exp-detail"><ul class="exp-bullets">
+      <li>Independently managed end-to-end visual content production for dozens of brands and production companies across film, advertising and digital platforms - from client brief through to final delivery</li>
+      <li>Scouted locations, directed shoots and ensured creative vision translated into practical, on-brief output aligned with campaign objectives</li>
+      <li>Clients include: Mr. Wonderful, Remax, SpotaHome, Masaj, League of Rebels, Sagesse Productions, SurFilm and 24/7</li>
+    </ul></div>
+  </div>
+
+  <!-- NEW: Scorpion Shoes — from CV, not in previous HTML -->
+  <div class="exp-item" onclick="toggleExp(this)">
+    <div class="exp-summary"><div class="exp-left"><div class="exp-role">Photographer &middot; Digital Marketing Assistant</div><div class="exp-co">Scorpion Shoes &middot; London</div><div class="exp-date">Aug 2017 – Jun 2018</div></div><div class="exp-toggle"><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12"/></svg></div></div>
+    <div class="exp-detail"><ul class="exp-bullets">
+      <li>Developed and executed visual content strategy for a footwear e-commerce platform, aligning photography output with user personas, seasonal KPIs and campaign objectives</li>
+      <li>Collaborated cross-functionally with the marketing team to ensure creative output directly supported business goals and brand engagement targets</li>
+    </ul></div>
+  </div>
+
+  <!-- Updated: 100-guest detail + CRM -->
+  <div class="exp-item" onclick="toggleExp(this)">
+    <div class="exp-summary"><div class="exp-left"><div class="exp-role">Front Desk &amp; Guest Experience</div><div class="exp-co">Dover Castle Hostel &middot; London</div><div class="exp-date">Mar 2015 – Aug 2017</div></div><div class="exp-toggle"><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12"/></svg></div></div>
+    <div class="exp-detail"><ul class="exp-bullets">
+      <li>Managed high-volume front desk operations for a 100-guest international hostel, coordinating across housekeeping and breakfast teams to ensure consistent service delivery</li>
+      <li>Resolved complex service failures in real time while operating booking software and CRM systems, delivering multilingual guest support in English, Portuguese and Spanish</li>
+    </ul></div>
+  </div>
+
+  <!-- Updated: BFI Southbank flagship detail -->
+  <div class="exp-item" onclick="toggleExp(this)">
+    <div class="exp-summary"><div class="exp-left"><div class="exp-role">Team Leader</div><div class="exp-co">Benugo &middot; London</div><div class="exp-date">Apr 2012 – Jun 2015</div></div><div class="exp-toggle"><svg viewBox="0 0 14 14"><path d="M7 1v12M1 7h12"/></svg></div></div>
+    <div class="exp-detail"><ul class="exp-bullets">
+      <li>Led daily operations at Benugo's flagship BFI Southbank location - one of London's most prominent cultural venues - managing a team of 15 in a high-volume, fast-paced environment</li>
+      <li>Oversaw staff onboarding, performance management and service quality, coordinating across kitchen, housekeeping and front-of-house teams</li>
+      <li>Completed formal leadership and staff development training, building people management foundations directly applicable to cross-functional team leadership</li>
+    </ul></div>
+  </div>
+
+</div>
+
+<!-- EDUCATION -->
+<div class="section" id="edu">
+
+  <div class="sec-hero">
+    <div class="sec-hero-title">Education</div>
+    <p class="sec-hero-sub">Formal training across science, visual arts and product management.</p>
+  </div>
+
+  <div class="edu-item">
+    <div class="edu-degree">Product Management &amp; AI Bootcamp</div>
+    <div class="edu-school">AllWomen</div>
+    <div class="edu-date">Feb 2026 – Apr 2026 &middot; Online</div>
+    <p class="edu-desc">Agile methodologies, product strategy, user research, roadmapping, and Generative AI integration in product workflows.</p>
+  </div>
+
+  <div class="edu-item">
+    <div class="edu-degree">BA Photography</div>
+    <div class="edu-school">University of the Arts London – London College of Communication</div>
+    <div class="edu-date">2014 – 2017 &middot; London</div>
+    <p class="edu-desc">A photography degree that went far beyond the camera - critical theory, conceptual thinking, visual communication, and analysing how technology and culture shape the world we live in.</p>
+  </div>
+
+  <div class="edu-item">
+    <div class="edu-degree">Science – Nutrition (3 years completed)</div>
+    <div class="edu-school">Atlântica University</div>
+    <div class="edu-date">2007 – 2010 &middot; Portugal</div>
+    <p class="edu-desc">Three years of rigorous scientific training spanning data analysis, research methods, human behaviour and systems thinking - the analytical foundation I bring to every complex problem.</p>
+  </div>
+
+  <!-- Updated: AI Fluency cert added -->
+  <div class="cert-section">
+    <div class="cert-label">Certifications</div>
+    <div class="cert-grid">
+      <div class="cert-pill">AI Fluency: Framework &amp; Foundations</div>
+      <div class="cert-pill">Google AI Essentials Specialisation</div>
+      <div class="cert-pill">Social Media Marketing I &amp; II</div>
+      <div class="cert-pill">Online Marketing Fundamentals</div>
+      <div class="cert-pill">Leadership</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- SKILLS -->
+<div class="section" id="skills">
+
+  <div class="sec-hero">
+    <div class="sec-hero-title">Skills &amp; Languages</div>
+    <p class="sec-hero-sub">10+ years of cross-functional experience - distilled into the tools, methods and mindsets that matter.</p>
+  </div>
+
+  <!-- Updated: Data Analysis added -->
+  <div class="skill-block">
+    <div class="skill-block-header"><div class="skill-block-label">Product</div></div>
+    <div class="skill-grid">
+      <div class="skill-item">Product Strategy</div>
+      <div class="skill-item">Roadmapping</div>
+      <div class="skill-item">User Research</div>
+      <div class="skill-item">Agile / Scrum / Kanban</div>
+      <div class="skill-item">Prioritisation</div>
+      <div class="skill-item">PRD Writing</div>
+      <div class="skill-item">Stakeholder Management</div>
+      <div class="skill-item">Cross-functional Collaboration</div>
+      <div class="skill-item">Data Analysis</div>
+    </div>
+  </div>
+
+  <div class="skill-block">
+    <div class="skill-block-header"><div class="skill-block-label">Leadership &amp; Ops</div></div>
+    <div class="skill-grid">
+      <div class="skill-item">Team Leadership</div>
+      <div class="skill-item">Operations Management</div>
+      <div class="skill-item">Budget Management</div>
+      <div class="skill-item">Creative Problem Solving</div>
+      <div class="skill-item">Process Design</div>
+      <div class="skill-item">Delivery Under Pressure</div>
+      <div class="skill-item">Production Management</div>
+    </div>
+  </div>
+
+  <!-- Updated: CRM added -->
+  <div class="skill-block">
+    <div class="skill-block-header"><div class="skill-block-label">Tools &amp; AI</div></div>
+    <div class="skill-grid">
+      <div class="skill-item">GenAI / AI Tools</div>
+      <div class="skill-item">Jira</div>
+      <div class="skill-item">Figma</div>
+      <div class="skill-item">Miro</div>
+      <div class="skill-item">Notion</div>
+      <div class="skill-item">Google Analytics</div>
+      <div class="skill-item">CRM</div>
+    </div>
+  </div>
+
+  <div class="skill-block">
+    <div class="skill-block-header"><div class="skill-block-label">Languages</div></div>
+    <div class="lang-grid">
+      <div class="lang-item"><div class="lang-code">PT</div><div class="lang-name">Portuguese</div><div class="lang-level">Native</div></div>
+      <div class="lang-item"><div class="lang-code">EN</div><div class="lang-name">English</div><div class="lang-level">Full Professional</div></div>
+      <div class="lang-item"><div class="lang-code">ES</div><div class="lang-name">Spanish</div><div class="lang-level">Professional</div></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function showTab(id,el){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  el.classList.add('active');
+  window.scrollTo({top:document.querySelector('.nav').offsetTop,behavior:'smooth'});
+}
+function toggleExp(el){el.classList.toggle('open');}
+</script>
+</body>
+</html>
